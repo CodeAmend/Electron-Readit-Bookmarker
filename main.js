@@ -1,6 +1,22 @@
 // Modules
-const {app} = require('electron');
+const {app, ipcMain} = require('electron');
 const mainWindow = require('./mainWindow');
+
+require('electron-reload')(__dirname);
+
+// Listen for new readitem
+ipcMain.on('new-item', (e, itemUrl) => {
+
+  // Mock return of url screenshot and data
+  setTimeout(() => {
+    e.sender.send('new-item-success', "so damn successful");
+  }, 2000);
+
+});
+
+
+
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
