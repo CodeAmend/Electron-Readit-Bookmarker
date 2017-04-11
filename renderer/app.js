@@ -1,6 +1,18 @@
 const {ipcRenderer} = require('electron');
 const items = require('./items.js');
 
+// Navigate selected item with key up/down event
+$(document).keydown((e) => {
+  switch (e.key) {
+    case 'ArrowUp':
+    items.changeItem('up');
+      break;
+    case 'ArrowDown':
+    items.changeItem('down');
+      break;
+  }
+});
+
 // Show add-modal
 $('.open-add-modal').click(() => {
   $('#add-modal').addClass('is-active');
@@ -69,3 +81,4 @@ $('#search').keyup((e) => {
 // Add items when app loads
 if (items.toreadItems.length)
   items.toreadItems.forEach(items.addItem);
+  $('.read-item:first()').addClass('is-active');

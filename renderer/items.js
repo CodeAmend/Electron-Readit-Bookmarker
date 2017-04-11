@@ -12,6 +12,22 @@ exports.selectItem = (e) => {
   $(e.currentTarget).addClass('is-active');
 }
 
+// Select next previous item
+exports.changeItem = (direction) => {
+
+  // Get current active item
+  let activeItem = $('.read-item.is-active');
+
+  // Check direction and get next or previous item
+  let newItem = (direction === 'down') ? activeItem.next('.read-item') : activeItem.prev('.read-item');
+
+  // Only if item exists make selection change
+  if (newItem.length) {
+    activeItem.removeClass('is-active');
+    newItem.addClass('is-active');
+  }
+}
+
 // Module add new item to UI
 exports.addItem = (item) => {
 
