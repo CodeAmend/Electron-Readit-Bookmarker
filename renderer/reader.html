@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../bower_components/bulma/css/bulma.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css">
+
+    <style>
+      body,
+      html,
+      webview {
+        height: 100%;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <h1></h1>
+    <webview src="about:blank"></webview>
+
+    <script>
+
+      // jQuery
+      $ = require('jquery');
+
+      // Query string module
+      const queryString = require('query-string');
+
+      // Parse query string
+      const queryParams = queryString.parse(location.search);
+
+      // Get query string 'url'
+      let url = decodeURIComponent(queryParams.url);
+
+      // Load item content URL to webview
+      $('webview').one('dom-ready', (e) => {
+        $('h1').html(loacation.search)
+        e.currentTarget.loadURL(url);
+      });
+    </script>
+
+  </body>
+</html>

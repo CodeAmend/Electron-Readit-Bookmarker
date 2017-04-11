@@ -37,10 +37,13 @@ exports.openItem = () => {
   // Get selected item
   let targetItem = $('.read-item.is-active');
 
-  // Get items content URL
-  let contentURL = targetItem.data('url');
+  // Get items content URL (encoded)
+  let contentURL = encodeURIComponent(targetItem.data('url'));
 
-  console.log("Opening item...", contentURL);
+  // Reader window URL
+  let readerWinURL = `file://${__dirname}/reader.html?${contentURL}`;
+  // Open in new proxy browser window
+  let readerWin = window.open(readerWinURL, targetItem.data('title'));
 }
 
 // Module add new item to UI
@@ -50,7 +53,7 @@ exports.addItem = (item) => {
   $('#no-items').hide();
 
   // New item HTML
-  let itemHTML = `<a class="panel-block read-item" data-url="${item.url}">
+  let itemHTML = `<a class="panel-block read-item" data-url="${item.url}" data-title="${item.title}">
                     <figure class="image has-shadow is-64x64 thumb">
                       <img src="${item.screenshot}"/>
                     </figure>
