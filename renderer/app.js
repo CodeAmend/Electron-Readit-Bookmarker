@@ -12,10 +12,18 @@ $('.close-add-modal').click(() => {
 
 // Handle add button url submittion
 $('#add-button').click(() => {
-  let url = $('#item-input').val();
+  let newItemURL = $('#item-input').val();
+  if(newItemURL) {
 
+    // Disable modal UI
+    $('#add-button').addClass('is-loading');
+    $('#item-input').addClass('is-disabled');
+    $('.close-add-modal').addClass('is-disabled');
 
-  ipcRenderer.send('new-item', url);
+    // Send URL to main process IPC
+    ipcRenderer.send('new-item', newItemURL);
+  }
+
 });
 
 // Handle keyup event for item-input
@@ -24,5 +32,8 @@ $('#item-input').keyup((e) => {
 });
 
 ipcRenderer.on('new-item-success', (e, ret) => {
+  $('#add-modal').removeClass('is-active');
+  $('#item-input').prop('disabled', true).val('');
+  $('#add-button').removeClass('is-loading');
   console.log(ret);
 })
