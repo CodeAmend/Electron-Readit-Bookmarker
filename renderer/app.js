@@ -54,6 +54,15 @@ ipcRenderer.on('new-item-success', (e, item) => {
 
 });
 
+// Filter items by search
+$('#search').keyup((e) => {
+  let filter = $(e.currentTarget).val();
+  $('.read-item').each((index, element) => {
+    let el = $(element);
+    el.text().toLowerCase().includes(filter) ? $(el).show() : $(el).hide();
+  })
+})
+
 // Add items when app loads
 if (items.toreadItems.length)
   items.toreadItems.forEach(items.addItem);

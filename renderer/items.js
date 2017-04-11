@@ -6,6 +6,12 @@ exports.saveItem = (item) => {
   localStorage.setItem('toreadItems', JSON.stringify(this.toreadItems));
 }
 
+// Toggle item selected
+exports.selectItem = (e) => {
+  $('.read-item').removeClass('is-active');
+  $(e.currentTarget).addClass('is-active');
+}
+
 // Module add new item to UI
 exports.addItem = (item) => {
 
@@ -22,5 +28,8 @@ exports.addItem = (item) => {
 
   // Append item to read-list
   $('#read-list').append(itemHTML);
+
+  // Attach select event handler
+  $('.read-item').on('click', this.selectItem);
 
 }
