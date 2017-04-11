@@ -1,3 +1,11 @@
+// Track items with array and load any starage from previous sessions
+exports.toreadItems = JSON.parse(localStorage.getItem('toreadItems')) || [];
+
+// Save items to local storage
+exports.saveItem = (item) => {
+  localStorage.setItem('toreadItems', JSON.stringify(this.toreadItems));
+}
+
 // Module add new item to UI
 exports.addItem = (item) => {
 

@@ -13,8 +13,10 @@ $('.close-add-modal').click(() => {
 
 // Handle add button url submittion
 $('#add-button').click(() => {
+
+  // Get URL from input
   let newItemURL = $('#item-input').val();
-  if(newItemURL) {
+  if (newItemURL) {
 
     // Disable modal UI
     $('#add-button').addClass('is-loading');
@@ -35,6 +37,12 @@ $('#item-input').keyup((e) => {
 // Listen for new items from main
 ipcRenderer.on('new-item-success', (e, item) => {
 
+  // Add item to item array
+  items.toreadItems.push(item);
+
+  // Save item to storage
+  items.saveItem(item);
+
   // Add item
   items.addItem(item);
 
@@ -45,3 +53,7 @@ ipcRenderer.on('new-item-success', (e, item) => {
   $('.close-add-modal').removeClass('is-disabled');
 
 });
+
+// Add items when app loads
+if (items.toreadItems.length)
+  items.toreadItems.forEach(items.addItem);
