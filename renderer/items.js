@@ -41,7 +41,7 @@ exports.openItem = () => {
   let contentURL = encodeURIComponent(targetItem.data('url'));
 
   // Reader window URL
-  let readerWinURL = `file://${__dirname}/reader.html?${contentURL}`;
+  let readerWinURL = `file://${__dirname}/reader.html?url=${contentURL}`;
   // Open in new proxy browser window
   let readerWin = window.open(readerWinURL, targetItem.data('title'));
 }
