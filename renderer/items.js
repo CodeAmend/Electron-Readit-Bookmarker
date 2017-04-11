@@ -28,6 +28,21 @@ exports.changeItem = (direction) => {
   }
 }
 
+// Open items for reading
+exports.openItem = () => {
+
+  // Only if item has been added
+  if (!this.toreadItems.length) return;
+
+  // Get selected item
+  let targetItem = $('.read-item.is-active');
+
+  // Get items content URL
+  let contentURL = targetItem.data('url');
+
+  console.log("Opening item...", contentURL);
+}
+
 // Module add new item to UI
 exports.addItem = (item) => {
 
@@ -35,7 +50,7 @@ exports.addItem = (item) => {
   $('#no-items').hide();
 
   // New item HTML
-  let itemHTML = `<a class="panel-block read-item">
+  let itemHTML = `<a class="panel-block read-item" data-url="${item.url}">
                     <figure class="image has-shadow is-64x64 thumb">
                       <img src="${item.screenshot}"/>
                     </figure>
@@ -46,6 +61,9 @@ exports.addItem = (item) => {
   $('#read-list').append(itemHTML);
 
   // Attach select event handler
-  $('.read-item').on('click', this.selectItem);
+  $('.read-item')
+    .off('click, dblclick')
+    .on('click', this.selectItem)
+    .on('dblclick', this.openItem);
 
 }
