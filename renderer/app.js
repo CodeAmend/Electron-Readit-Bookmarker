@@ -17,7 +17,7 @@ $('#add-button').click(() => {
 
     // Disable modal UI
     $('#add-button').addClass('is-loading');
-    $('#item-input').addClass('is-disabled');
+    $('#item-input').prop('disabled', true);
     $('.close-add-modal').addClass('is-disabled');
 
     // Send URL to main process IPC
@@ -33,7 +33,8 @@ $('#item-input').keyup((e) => {
 
 ipcRenderer.on('new-item-success', (e, ret) => {
   $('#add-modal').removeClass('is-active');
-  $('#item-input').prop('disabled', true).val('');
+  $('#item-input').prop('disabled', false).val('');
   $('#add-button').removeClass('is-loading');
+  $('.close-add-modal').removeClass('is-disabled');
   console.log(ret);
 })
