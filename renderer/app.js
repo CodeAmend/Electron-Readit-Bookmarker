@@ -52,6 +52,9 @@ ipcRenderer.on('new-item-success', (e, item) => {
   $('#add-button').removeClass('is-loading');
   $('.close-add-modal').removeClass('is-disabled');
 
+  // Select first item in list
+  if (items.toreadItems.length === 1)
+    $('.read-item:first()').addClass('is-active');
 });
 
 // Filter items by search
