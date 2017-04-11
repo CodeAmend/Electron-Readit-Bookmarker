@@ -2,21 +2,21 @@
 const {app, ipcMain} = require('electron');
 const mainWindow = require('./mainWindow');
 
+const readItem = require('./readItem');
+
 require('electron-reload')(__dirname);
 
 // Listen for new readitem
-ipcMain.on('new-item', (e, itemUrl) => {
+ipcMain.on('new-item', (e, itemURL) => {
 
-  // Mock return of url screenshot and data
-  setTimeout(() => {
-    e.sender.send('new-item-success', "so damn successful");
-  }, 2000);
+  // Get read item with read item module.
+  readItem(itemURL, (item) => {
+
+    //Send to renderer
+    e.sender.send('new-item-success', item);
+  });
 
 });
-
-
-
-
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
